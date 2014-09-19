@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     private boolean isHeartOneVisible = true;
     private boolean isHeartTwoVisible = true;
     private boolean isHeartThreeVisible = true;
+    private boolean cycleFlag = false;
     private int lives = 3;
     private long secondsCounter;
     int operation=0;
@@ -90,12 +91,15 @@ public class MainActivity extends Activity {
                 if(lives >= 0){
                     lifeCounter(lives);
                     gameTimer(5000);
-                }else if (lives<0){
+                    cycleFlag = false;
+                }else if (lives<0 && cycleFlag == false){
                     Toast.makeText(mContext, "You Lose!!" +" " + ("\ud83d\ude1e"), Toast.LENGTH_SHORT).show();
                     mRelativeLayout.removeAllViews();
+                    cycleFlag = true;
                     Intent intent = getIntent();
                     finish();
                     startActivity(intent);
+
                 }
 
             }
